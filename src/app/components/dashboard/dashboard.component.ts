@@ -9,23 +9,36 @@ import { NavbarComponent } from 'src/app/shared/navbar/navbar.component';
 export class DashboardComponent implements OnInit {
   title = "Dashboard"
   notificationCount = 10;
+
+  //this VewChild has nothing to do with tempelate variable
+  @ViewChild(NavbarComponent) navbarr!: NavbarComponent;
+
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+  }
+
+  ngAfterViewInit() {
+    this.addItemInChildArrayUsingViewChild();
   }
 
   updateCount(count: number) {
     this.notificationCount = count
   }
 
-  addItemInChildArray(navbar: NavbarComponent) {
+  addItemInChildArrayUsingTemplateVariable(navbar: NavbarComponent) {
     navbar.array.push(navbar.array.length + 1);
   }
 
-  removeItemInChildArray(navbar: NavbarComponent) {
+  removeItemInChildArrayUsingTemplateVariable(navbar: NavbarComponent) {
     if (navbar.array.length == 1) {
       return
     }
     navbar.array.pop();
+  }
+
+  addItemInChildArrayUsingViewChild() {
+    console.log(this.navbarr)
+    this.navbarr.array.push(this.navbarr.array.length + 1);
   }
 }
