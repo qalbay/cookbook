@@ -1,1 +1,7 @@
-<app-navbar [title]=title [countFromParent]=notificationCount (changedCountFromChild)="updateCount($event)"></app-navbar>
+<app-navbar [title]=title [countFromParent]=notificationCount (changedCountFromChild)="updateCount($event)" #navbar>
+</app-navbar>
+
+<div class="gallery-actions">
+  <button class="btn btn-primary" (click)="addItemInChildArray(navbar)">increment</button>
+  <button class="btn btn-danger" (click)="removeItemInChildArray(navbar)">decrement</button>
+</div>

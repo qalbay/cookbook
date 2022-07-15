@@ -1,5 +1,5 @@
 import { NotificationsService } from './../../services/notifications.service';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { first, Observable } from 'rxjs';
 
 @Component({
@@ -12,6 +12,8 @@ export class NavbarComponent implements OnInit {
   @Input() countFromParent = 0;
   @Output() changedCountFromChild = new EventEmitter<number>();
   notificationCount$!: Observable<number>
+  @ViewChild('input') input!: ElementRef;
+  array=[1,2,3,4,5]
 
   constructor(
     private notificationsService: NotificationsService
@@ -19,6 +21,24 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.notificationCount$ = this.notificationsService.count$
+  }
+
+  ngAfterViewInit() {
+    this.input.nativeElement.focus();
+    this.input.nativeElement.classList="form-control w-25";
+    this.input.nativeElement.value=this.title;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    //to detect the @Input changes from parent.
+
+    const currentNotifications = changes['countFromParent'].currentValue
+    if (changes['countFromParent'].firstChange) {
+      console.log('current count: ', currentNotifications)
+    }
+    else {
+      console.log('count changed to: ', currentNotifications)
+    }
   }
 
   addCount() {
