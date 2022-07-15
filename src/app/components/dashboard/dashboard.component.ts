@@ -9,6 +9,7 @@ import { NavbarComponent } from 'src/app/shared/navbar/navbar.component';
 export class DashboardComponent implements OnInit {
   title = "Dashboard"
   notificationCount = 10;
+  search = '';
 
   //this VewChild has nothing to do with tempelate variable
   @ViewChild(NavbarComponent) navbarr!: NavbarComponent;

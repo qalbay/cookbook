@@ -1,7 +1,22 @@
 <app-navbar [title]=title [countFromParent]=notificationCount (changedCountFromChild)="updateCount($event)" #navbar>
 </app-navbar>
 
-<div class="gallery-actions">
-  <button class="btn btn-primary" (click)="addItemInChildArrayUsingTemplateVariable(navbar)">increment</button>
-  <button class="btn btn-danger" (click)="removeItemInChildArrayUsingTemplateVariable(navbar)">decrement</button>
+<div class="container-fluid">
+
+  <div class="gallery-actions">
+    <button class="btn btn-primary" (click)="addItemInChildArrayUsingTemplateVariable(navbar)">increment</button>
+    <button class="btn btn-danger" (click)="removeItemInChildArrayUsingTemplateVariable(navbar)">decrement</button>
+  </div>
+
+  <div class="para my-4">
+    <input type="text" class="form-control mb-2" [(ngModel)]="search" placeholder="Search...">
+    <div appHighlight [highlightText]="search" appReadTime>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem magnam molestias porro autem atque nisi temporibus
+      saepe reprehenderit a adipisci vel delectus est quod animi laudantium, at numquam exercitationem quis?Lorem ipsum
+      dolor sit amet consectetur adipisicing elit. Rem magnam molestias porro autem atque nisi temporibus
+      saepe reprehenderit a adipisci vel delectus est quod animi laudantium, at numquam exercitationem quis?Lorem ipsum
+      dolor sit amet consectetur adipisicing elit. Rem magnam molestias porro autem atque nisi temporibus.
+    </div>
+  </div>
+
 </div>
