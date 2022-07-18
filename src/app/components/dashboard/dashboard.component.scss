@@ -1,0 +1,24 @@
+.readtime {
+  font-size: 13px;
+  color: dimgray;
+  font-style: italic;
+}
+
+.scroll {
+  white-space: nowrap;
+  overflow: auto;
+  width: calc(100vw - 52px);
+  height: 40px;
+}
+
+#light {
+  font-weight: 400;
+}
+
+#bolder {
+  font-weight: 600;
+}
+
+#max-bold {
+  font-weight: 900;
+}

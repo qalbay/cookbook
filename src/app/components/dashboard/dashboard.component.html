@@ -4,19 +4,47 @@
 <div class="container-fluid">
 
   <div class="gallery-actions">
-    <button class="btn btn-primary" (click)="addItemInChildArrayUsingTemplateVariable(navbar)">increment</button>
+    <button class="btn btn-primary me-2" (click)="addItemInChildArrayUsingTemplateVariable(navbar)">increment</button>
     <button class="btn btn-danger" (click)="removeItemInChildArrayUsingTemplateVariable(navbar)">decrement</button>
   </div>
 
   <div class="para my-4">
     <input type="text" class="form-control mb-2" [(ngModel)]="search" placeholder="Search...">
-    <div appHighlight [highlightText]="search" appReadTime>
+    <div appHighlight [highlightText]="search" appReadTime (readTimeCalculated)="showReadTime($event)">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem magnam molestias porro autem atque nisi temporibus
       saepe reprehenderit a adipisci vel delectus est quod animi laudantium, at numquam exercitationem quis?Lorem ipsum
       dolor sit amet consectetur adipisicing elit. Rem magnam molestias porro autem atque nisi temporibus
       saepe reprehenderit a adipisci vel delectus est quod animi laudantium, at numquam exercitationem quis?Lorem ipsum
       dolor sit amet consectetur adipisicing elit. Rem magnam molestias porro autem atque nisi temporibus.
     </div>
+    <div class="readtime">estimated read time {{readTime}}</div>
+
   </div>
 
+  <button class="btn btn-secondary btn-sm me-2" appScrollTo target="#light">scroll to light</button>
+  <button class="btn btn-secondary btn-sm me-2" appScrollTo target="#bolder">scroll to bolder</button>
+  <button class="btn btn-secondary btn-sm" appScrollTo target="#max-bold">scroll to max bold</button>
+
+  <div class="scroll my-3">
+    <div class="d-flex">
+      <div id="light">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere earum praesentium assumenda quibusdam
+        perferendis
+        illo magni beatae esse ea totam! Eveniet voluptatibus similique esse? Ipsum voluptatibus eveniet eum sapiente
+        necessitatibus?
+      </div>
+      <div id="bolder" class="ps-3">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere earum praesentium assumenda quibusdam
+        perferendis
+        illo magni beatae esse ea totam! Eveniet voluptatibus similique esse? Ipsum voluptatibus eveniet eum sapiente
+        necessitatibus?
+      </div>
+      <div id="max-bold" class="ps-3">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere earum praesentium assumenda quibusdam
+        perferendis
+        illo magni beatae esse ea totam! Eveniet voluptatibus similique esse? Ipsum voluptatibus eveniet eum sapiente
+        necessitatibus?
+      </div>
+    </div>
+  </div>
 </div>

@@ -10,9 +10,11 @@ export class DashboardComponent implements OnInit {
   title = "Dashboard"
   notificationCount = 10;
   search = '';
+  readTime!: string;
 
   //this VewChild has nothing to do with tempelate variable
   @ViewChild(NavbarComponent) navbarr!: NavbarComponent;
+  @ViewChild('content') content!:ElementRef;
 
   constructor() { }
 
@@ -21,6 +23,8 @@ export class DashboardComponent implements OnInit {
 
   ngAfterViewInit() {
     this.addItemInChildArrayUsingViewChild();
+
+    console.log(this.content)
   }
 
   updateCount(count: number) {
@@ -41,5 +45,9 @@ export class DashboardComponent implements OnInit {
   addItemInChildArrayUsingViewChild() {
     console.log(this.navbarr)
     this.navbarr.array.push(this.navbarr.array.length + 1);
+  }
+
+  showReadTime(readTimeStr: string) {
+    this.readTime = readTimeStr;
   }
 }
