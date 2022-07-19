@@ -1,11 +1,16 @@
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SocialCardComponent } from './components/social-card/social-card.component';
 
 const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent
+  },
+  {
+    path: 'social',
+    component: SocialCardComponent
   },
   {
     path: '',

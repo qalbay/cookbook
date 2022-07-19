@@ -1,0 +1,22 @@
+<div class="row my-3">
+  <div class="d-flex justify-content-center my-2">
+    <button class="btn btn-dark me-2" (click)="setCardType(0)">
+      <div [@socialBtnText]="selectedCardType == 0 ? 'btn-active-text' : 'btn-inactive-text'">
+        Facebook
+      </div>
+    </button>
+    <button class="btn btn-dark" (click)="setCardType(1)">
+      <div [@socialBtnText]="selectedCardType == 1 ? 'btn-active-text' : 'btn-inactive-text'">
+        Twitter
+      </div>
+    </button>
+  </div>
+  <div [ngSwitch]="selectedCardType">
+    <div class="col-md-4 offset-md-4" *ngSwitchCase=0>
+      <app-facebook-card></app-facebook-card>
+    </div>
+    <div class="col-md-4 offset-md-4" *ngSwitchCase=1>
+      <app-twitter-card></app-twitter-card>
+    </div>
+  </div>
+</div>
