@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  Renderer2,
+} from '@angular/core';
 import { socialCardType } from 'src/app/constants/cards';
 import {
   trigger,
@@ -20,13 +27,7 @@ import {
         style({
           width: '80px',
           visibility: 'visible',
-        })
-      ),
-      state(
-        'btn-inactive-text',
-        style({
-          width: '0px',
-          visibility: 'hidden',
+          fontWeight: 700,
         })
       ),
       transition('btn-active-text =>btn-inactive-text', [
@@ -67,11 +68,17 @@ import {
 })
 export class SocialCardComponent implements OnInit {
   cardType!: socialCardType;
-  selectedCardType: socialCardType = 1;
+  selectedCardType: socialCardType = 0;
+  cardState: string = 'active';
+  @ViewChild('fbcard') fbcard!: ElementRef;
 
-  constructor() {}
+  constructor(private renderer: Renderer2) {}
 
   ngOnInit(): void {}
+
+  ngAfterViewInit() {
+    // this.renderer.addClass(this.fbcard.nativeElement, 'w-25');
+  }
 
   setCardType(type: socialCardType) {
     this.selectedCardType = type;

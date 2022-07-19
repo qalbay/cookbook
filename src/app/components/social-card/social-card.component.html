@@ -13,7 +13,16 @@
   </div>
   <div [ngSwitch]="selectedCardType">
     <div class="col-md-4 offset-md-4" *ngSwitchCase=0>
-      <app-facebook-card></app-facebook-card>
+      <div class="flip-box">
+        <div class="flip-box-inner">
+          <div class="flip-box-front">
+            <app-facebook-card></app-facebook-card>
+          </div>
+          <div class="flip-box-back">
+            <app-facebook-card></app-facebook-card>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="col-md-4 offset-md-4" *ngSwitchCase=1>
       <app-twitter-card></app-twitter-card>
