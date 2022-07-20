@@ -1,27 +1,36 @@
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SocialCardComponent } from './components/social-card/social-card.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: 'dashboard',
-    component: DashboardComponent
+    data: {
+      animation: 'DashboardPage',
+    },
+    loadChildren: () =>
+      import('./components/dashboard/dashboard.module').then(
+        (m) => m.DashboardModule
+      ),
   },
   {
     path: 'social',
-    component: SocialCardComponent
+    data: {
+      animation: 'SocialPage',
+    },
+    loadChildren: () =>
+      import('./components/social-card/social-card.module').then(
+        (m) => m.SocialCardModule
+      ),
   },
   {
     path: '',
     redirectTo: 'dashboard',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
-
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

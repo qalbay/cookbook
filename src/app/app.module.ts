@@ -1,3 +1,5 @@
+import { RouterModule } from '@angular/router';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SocialCardModule } from './components/social-card/social-card.module';
 import { DashboardModule } from './components/dashboard/dashboard.module';
 import { NgModule } from '@angular/core';
@@ -7,20 +9,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
+import { routes } from './app-routing.module';
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     DashboardModule,
     SocialCardModule,
     BrowserAnimationsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

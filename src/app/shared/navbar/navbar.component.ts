@@ -1,43 +1,55 @@
 import { NotificationsService } from './../../services/notifications.service';
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { first, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
   @Input() title = '';
   @Input() countFromParent = 0;
   @Output() changedCountFromChild = new EventEmitter<number>();
-  notificationCount$!: Observable<number>
+  notificationCount$!: Observable<number>;
   @ViewChild('input') input!: ElementRef;
-  array=[1,2,3,4,5]
+  array = [1, 2, 3, 4, 5];
 
   constructor(
-    private notificationsService: NotificationsService
-  ) { }
+    private notificationsService: NotificationsService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.notificationCount$ = this.notificationsService.count$
+    this.notificationCount$ = this.notificationsService.count$;
   }
 
   ngAfterViewInit() {
     this.input.nativeElement.focus();
-    this.input.nativeElement.classList="form-control w-25";
-    this.input.nativeElement.value=this.title;
+    this.input.nativeElement.classList = 'form-control w-25';
+    this.input.nativeElement.value = this.title;
   }
 
   ngOnChanges(changes: SimpleChanges) {
     //to detect the @Input changes from parent.
-
-    const currentNotifications = changes['countFromParent'].currentValue
-    if (changes['countFromParent'].firstChange) {
-      console.log('current count: ', currentNotifications)
+    if (!changes['countFromParent']) {
+      return;
     }
-    else {
-      console.log('count changed to: ', currentNotifications)
+    const currentNotifications = changes['countFromParent'].currentValue;
+    if (changes['countFromParent'].firstChange) {
+      console.log('current count: ', currentNotifications);
+    } else {
+      console.log('count changed to: ', currentNotifications);
     }
   }
 
@@ -48,7 +60,7 @@ export class NavbarComponent implements OnInit {
 
   removeCount() {
     if (this.countFromParent == 0) {
-      return
+      return;
     }
     this.countFromParent--;
     this.changedCountFromChild.emit(this.countFromParent);
@@ -56,15 +68,12 @@ export class NavbarComponent implements OnInit {
 
   //service
   getCountValue(callback: any) {
-    this.notificationCount$
-      .pipe(
-        first()
-      ).subscribe(callback)
+    this.notificationCount$.pipe(first()).subscribe(callback);
   }
 
   addServiceNotification() {
     this.getCountValue((countVal: number) => {
-      this.notificationsService.setCount(++countVal)
+      this.notificationsService.setCount(++countVal);
     });
   }
 
@@ -74,7 +83,14 @@ export class NavbarComponent implements OnInit {
         return;
       }
       this.notificationsService.setCount(--countVal);
-    })
+    });
   }
 
+  dashboard() {
+    this.router.navigate(['/dashboard']);
+  }
+
+  social() {
+    this.router.navigate(['/social']);
+  }
 }

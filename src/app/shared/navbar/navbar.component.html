@@ -1,7 +1,9 @@
 <div class="container-fluid my-3">
   <div class="d-flex align-items-center justify-content-between">
-    <!-- <div>{{title}}</div> -->
+
     <input #input>
+    <button class="btn btn-dark" (click)="dashboard()">D</button>
+    <button class="btn btn-dark" (click)="social()">S</button>
     <div *ngFor="let item of array">{{item}}</div>
 
     <div class="border p-1">
