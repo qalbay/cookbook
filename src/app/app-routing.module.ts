@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+import { RxjsComponent } from './components/rxjs/rxjs.component';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 export const routes: Routes = [
@@ -21,6 +22,10 @@ export const routes: Routes = [
       import('./components/social-card/social-card.module').then(
         (m) => m.SocialCardModule
       ),
+  },
+  {
+    path: 'rxjs',
+    component: RxjsComponent,
   },
   {
     path: '',

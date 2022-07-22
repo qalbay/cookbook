@@ -27,13 +27,7 @@ export class DashboardComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
-    // this.mySubscription = interval(1000).subscribe((x) => {
-    //   console.log(x);
-    // });
-
-    const myObservable = new Observable((obj) => obj.next(Math.random()));
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {
     this.addItemInChildArrayUsingViewChild();
