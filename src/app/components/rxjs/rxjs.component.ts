@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subject, Subscription, interval } from 'rxjs';
+import {
+  Observable,
+  Subject,
+  Subscription,
+  interval,
+  BehaviorSubject,
+} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ajax } from 'rxjs/ajax';
 
@@ -13,9 +19,7 @@ export class RxjsComponent implements OnInit {
 
   constructor(private http: HttpClient) {}
 
-  ngOnInit() {
-    this.obs();
-  }
+  ngOnInit() {}
 
   startInterval() {
     this.mySubscription = interval(1000).subscribe((x) => {
@@ -42,15 +46,20 @@ export class RxjsComponent implements OnInit {
   useSubject() {
     const subject = new Subject();
 
-    const c = subject.subscribe((c) => {
-      console.log(c);
+    subject.subscribe((res) => {
+      console.log(res);
     });
 
-    const d = subject.subscribe((d) => {
-      console.log(d);
+     subject.subscribe((res) => {
+      console.log(res);
     });
 
     subject.next(Math.random());
+
+    subject.subscribe((res) => {
+      console.log(res);
+    });
+
   }
 
   fetchData() {
@@ -80,17 +89,18 @@ export class RxjsComponent implements OnInit {
       });
   }
 
-  obs() {
-    const subject=new Subject();
+  behaviourSubject() {
+    const bsubject = new BehaviorSubject<number>(0);
 
-    subject.subscribe(a=>{
-      console.log(a)
-    })
+    bsubject.subscribe((res) => {
+      console.log(`sub 1: ${res}`);
+    });
 
-    subject.subscribe(a=>{
-      console.log(a)
-    })
+    bsubject.next(1);
 
-    subject.next(Math.random())
+    bsubject.subscribe((res) => {
+      console.log(`sub 2: ${res}`);
+    });
+
   }
 }
