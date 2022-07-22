@@ -1,34 +1,48 @@
-import { Component, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
+import { interval, Subscription, Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { NavbarComponent } from 'src/app/shared/navbar/navbar.component';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  title = "Dashboard"
+  title = 'Dashboard';
   notificationCount = 10;
   search = '';
   readTime!: string;
 
   //this VewChild has nothing to do with tempelate variable
   @ViewChild(NavbarComponent) navbarr!: NavbarComponent;
-  @ViewChild('content') content!:ElementRef;
+  @ViewChild('content') content!: ElementRef;
+  mySubscription!: Subscription;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
+    // this.mySubscription = interval(1000).subscribe((x) => {
+    //   console.log(x);
+    // });
+
+    const myObservable = new Observable((obj) => obj.next(Math.random()));
   }
 
   ngAfterViewInit() {
     this.addItemInChildArrayUsingViewChild();
 
-    console.log(this.content)
+    console.log(this.content);
   }
 
   updateCount(count: number) {
-    this.notificationCount = count
+    this.notificationCount = count;
   }
 
   addItemInChildArrayUsingTemplateVariable(navbar: NavbarComponent) {
@@ -37,17 +51,21 @@ export class DashboardComponent implements OnInit {
 
   removeItemInChildArrayUsingTemplateVariable(navbar: NavbarComponent) {
     if (navbar.array.length == 1) {
-      return
+      return;
     }
     navbar.array.pop();
   }
 
   addItemInChildArrayUsingViewChild() {
-    console.log(this.navbarr)
+    console.log(this.navbarr);
     this.navbarr.array.push(this.navbarr.array.length + 1);
   }
 
   showReadTime(readTimeStr: string) {
     this.readTime = readTimeStr;
+  }
+
+  ngOnDestroy() {
+    this.mySubscription.unsubscribe();
   }
 }
