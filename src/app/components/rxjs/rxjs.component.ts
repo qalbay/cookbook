@@ -5,7 +5,12 @@ import {
   Subscription,
   interval,
   BehaviorSubject,
+  merge,
+  forkJoin,
+  throwError,
+  of,
 } from 'rxjs';
+import { catchError, delay, map, startWith } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { ajax } from 'rxjs/ajax';
 
@@ -50,7 +55,7 @@ export class RxjsComponent implements OnInit {
       console.log(res);
     });
 
-     subject.subscribe((res) => {
+    subject.subscribe((res) => {
       console.log(res);
     });
 
@@ -59,7 +64,6 @@ export class RxjsComponent implements OnInit {
     subject.subscribe((res) => {
       console.log(res);
     });
-
   }
 
   fetchData() {
@@ -84,6 +88,7 @@ export class RxjsComponent implements OnInit {
   getUsers() {
     return this.http
       .get('https://jsonplaceholder.typicode.com/users')
+      .pipe(map((res) => res))
       .subscribe((res) => {
         console.log(res);
       });
@@ -101,6 +106,29 @@ export class RxjsComponent implements OnInit {
     bsubject.subscribe((res) => {
       console.log(`sub 2: ${res}`);
     });
+  }
 
+  one = interval(500);
+  two = interval(500);
+  three = interval(500);
+
+  merge() {
+    const mergeExample = merge(this.one, this.two, this.three);
+
+    mergeExample.subscribe((res) => {
+      console.log(res);
+    });
+  }
+
+  forkjoin() {
+    const forkExample = forkJoin({
+      google: ajax.getJSON('https://api.github.com/users/google'),
+      microsoft: ajax.getJSON('https://api.github.com/users/microsoft'),
+      users: ajax.getJSON('https://api.github.com/users'),
+    }).pipe(catchError((error) => of(error)));
+
+    forkExample.pipe(delay(1000)).subscribe((res) => {
+      console.log(res);
+    });
   }
 }
