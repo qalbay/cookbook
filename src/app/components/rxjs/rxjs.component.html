@@ -1,4 +1,5 @@
 <div class="container-fluid my-3">
+  <input class="form-control mb-3" [formControl]="search" placeholder="Search...">
   <button class="btn btn-dark m-1" (click)="startInterval()">Start Interval</button>
   <button class="btn btn-dark m-1" (click)="stopInterval()">Stop Interval</button>
   <button class="btn btn-dark m-1" (click)="useObservable()">Use Observable</button>
@@ -8,5 +9,5 @@
   <button class="btn btn-dark m-1" (click)="behaviourSubject()">Use Behaviour Subject</button>
   <button class="btn btn-dark m-1" (click)="merge()">Merge Example</button>
   <button class="btn btn-dark m-1" (click)="forkjoin()">Forkjoin Example</button>
-
+  <button class="btn btn-dark m-1" (click)="destroyComponent()" id="myButton">Destroy Component</button>
 </div>

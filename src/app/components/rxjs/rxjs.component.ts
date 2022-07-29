@@ -9,10 +9,24 @@ import {
   forkJoin,
   throwError,
   of,
+  from,
+  partition,
+  fromEvent,
 } from 'rxjs';
-import { catchError, delay, map, startWith } from 'rxjs/operators';
+import {
+  catchError,
+  debounceTime,
+  delay,
+  filter,
+  map,
+  startWith,
+  switchMap,
+  take,
+  takeWhile,
+} from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { ajax } from 'rxjs/ajax';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-rxjs',
@@ -21,10 +35,28 @@ import { ajax } from 'rxjs/ajax';
 })
 export class RxjsComponent implements OnInit {
   mySubscription!: Subscription;
+  isComponentAlive!: boolean;
+  search = new FormControl('');
 
   constructor(private http: HttpClient) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.isComponentAlive = true;
+    this.searchData();
+
+    const source= of(1, 2, 3, 4, 5);
+
+    source
+      .pipe(takeWhile(val => val > 4))
+      // log: 1,2,3,4
+      .subscribe((val) => console.log(val));
+  }
+
+  searchData() {
+    this.search.valueChanges.pipe(debounceTime(1000)).subscribe((res) => {
+      console.log(res);
+    });
+  }
 
   startInterval() {
     this.mySubscription = interval(1000).subscribe((x) => {
@@ -113,11 +145,15 @@ export class RxjsComponent implements OnInit {
   three = interval(500);
 
   merge() {
+    this.isComponentAlive = true;
+
     const mergeExample = merge(this.one, this.two, this.three);
 
-    mergeExample.subscribe((res) => {
-      console.log(res);
-    });
+    mergeExample
+      .pipe(takeWhile(() => this.isComponentAlive))
+      .subscribe((res) => {
+        console.log(res);
+      });
   }
 
   forkjoin() {
@@ -130,5 +166,9 @@ export class RxjsComponent implements OnInit {
     forkExample.pipe(delay(1000)).subscribe((res) => {
       console.log(res);
     });
+  }
+
+  destroyComponent() {
+    this.isComponentAlive = false;
   }
 }

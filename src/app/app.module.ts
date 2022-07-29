@@ -12,6 +12,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { routes } from './app-routing.module';
 import { RxjsComponent } from './components/rxjs/rxjs.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [AppComponent, RxjsComponent],
   imports: [
@@ -21,7 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
     SocialCardModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
