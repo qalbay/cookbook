@@ -45,7 +45,6 @@ export class RxjsComponent implements OnInit {
     this.searchData();
 
     const source= of(1, 2, 3, 4, 5);
-
     source
       .pipe(takeWhile(val => val > 4))
       // log: 1,2,3,4
