@@ -37,6 +37,7 @@ export class RxjsComponent implements OnInit {
   mySubscription!: Subscription;
   isComponentAlive!: boolean;
   search = new FormControl('');
+  array:any[]=[];
 
   constructor(private http: HttpClient) {}
 
@@ -44,11 +45,15 @@ export class RxjsComponent implements OnInit {
     this.isComponentAlive = true;
     this.searchData();
 
-    const source= of(1, 2, 3, 4, 5);
-    source
-      .pipe(takeWhile(val => val > 4))
-      // log: 1,2,3,4
-      .subscribe((val) => console.log(val));
+    interval(1000)
+      .pipe(takeWhile(() => this.isComponentAlive))
+      .subscribe((res: number) => {
+        this.array.push(res);
+      });
+
+    setTimeout(() => {
+      this.isComponentAlive = false;
+    }, 5000);
   }
 
   searchData() {

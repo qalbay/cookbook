@@ -6,7 +6,7 @@ import {
   ElementRef,
 } from '@angular/core';
 import { interval, Subscription, Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 import { NavbarComponent } from 'src/app/shared/navbar/navbar.component';
 
 @Component({
@@ -31,8 +31,6 @@ export class DashboardComponent implements OnInit {
 
   ngAfterViewInit() {
     this.addItemInChildArrayUsingViewChild();
-
-    console.log(this.content);
   }
 
   updateCount(count: number) {
@@ -60,6 +58,8 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.mySubscription.unsubscribe();
+    if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
+    }
   }
 }

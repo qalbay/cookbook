@@ -10,4 +10,9 @@
   <button class="btn btn-dark m-1" (click)="merge()">Merge Example</button>
   <button class="btn btn-dark m-1" (click)="forkjoin()">Forkjoin Example</button>
   <button class="btn btn-dark m-1" (click)="destroyComponent()" id="myButton">Destroy Component</button>
+  <div *ngFor="let ac of array">
+    {{ac}}
+  </div>
+
+  <button routerLink="/">route</button>
 </div>
