@@ -37,7 +37,7 @@ export class RxjsComponent implements OnInit {
   mySubscription!: Subscription;
   isComponentAlive!: boolean;
   search = new FormControl('');
-  array:any[]=[];
+  array: any[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -45,15 +45,15 @@ export class RxjsComponent implements OnInit {
     this.isComponentAlive = true;
     this.searchData();
 
-    interval(1000)
-      .pipe(takeWhile(() => this.isComponentAlive))
-      .subscribe((res: number) => {
-        this.array.push(res);
-      });
+    // interval(1000)
+    //   .pipe(takeWhile(() => this.isComponentAlive))
+    //   .subscribe((res: number) => {
+    //     this.array.push(res);
+    //   });
 
-    setTimeout(() => {
-      this.isComponentAlive = false;
-    }, 5000);
+    // setTimeout(() => {
+    //   this.isComponentAlive = false;
+    // }, 5000);
   }
 
   searchData() {
@@ -69,7 +69,9 @@ export class RxjsComponent implements OnInit {
   }
 
   stopInterval() {
-    this.mySubscription.unsubscribe();
+    if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
+    }
   }
 
   useObservable() {
@@ -145,8 +147,8 @@ export class RxjsComponent implements OnInit {
   }
 
   one = interval(500);
-  two = interval(500);
-  three = interval(500);
+  two = interval(600);
+  three = interval(700);
 
   merge() {
     this.isComponentAlive = true;
