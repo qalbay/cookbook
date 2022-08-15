@@ -1,3 +1,4 @@
+import { RxjsService } from './rxjs.service';
 import { Component, OnInit } from '@angular/core';
 import {
   Observable,
@@ -39,7 +40,7 @@ export class RxjsComponent implements OnInit {
   search = new FormControl('');
   array: any[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private rxjsService: RxjsService) {}
 
   ngOnInit() {
     this.isComponentAlive = true;
@@ -57,9 +58,14 @@ export class RxjsComponent implements OnInit {
   }
 
   searchData() {
-    this.search.valueChanges.pipe(debounceTime(1000)).subscribe((res) => {
-      console.log(res);
-    });
+    this.search.valueChanges
+      .pipe(
+        takeWhile(() => this.isComponentAlive),
+        debounceTime(1000)
+      )
+      .subscribe((res: any) => {
+        this.rxjsService.search(res);
+      });
   }
 
   startInterval() {

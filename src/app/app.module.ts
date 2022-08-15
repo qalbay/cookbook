@@ -13,6 +13,9 @@ import { routes } from './app-routing.module';
 import { RxjsComponent } from './components/rxjs/rxjs.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+
+
 @NgModule({
   declarations: [AppComponent, RxjsComponent],
   imports: [
@@ -23,7 +26,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     FontAwesomeModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forRoot({})
   ],
   providers: [],
   bootstrap: [AppComponent],

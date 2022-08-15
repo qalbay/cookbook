@@ -1,16 +1,19 @@
 <div class="container-fluid my-3">
-  <div class="d-flex align-items-center justify-content-between">
+  <div class="row">
+    <div class="col-md-12 d-flex align-items-center justify-content-between">
 
-    <input #input>
-    <button class="btn btn-dark" (click)="dashboard()">D</button>
-    <button class="btn btn-dark" (click)="social()">S</button>
-    <div *ngFor="let item of array">{{item}}</div>
+      <input #input>
+      <button class="btn btn-dark" (click)="dashboard()">D</button>
+      <button class="btn btn-dark" (click)="social()">S</button>
+      <div *ngFor="let item of array">{{item}}</div>
 
-    <div class="border p-1">
-      <button class="btn btn-dark" (click)="addCount()">+</button>
-      Messages <span class="badge bg-dark me-1">{{countFromParent}}</span>
-      Service <span class="badge bg-dark me-1">{{notificationCount$ | async}}</span>
-      <button class="btn btn-dark" (click)="removeCount()">-</button>
+      <div class="border p-1">
+        <button class="btn btn-dark" (click)="addCount()">+</button>
+        Messages <span class="badge bg-dark me-1">{{countFromParent}}</span>
+        Service <span class="badge bg-dark me-1">{{notificationCount$ | async}}</span>
+        <button class="btn btn-dark" (click)="removeCount()">-</button>
+      </div>
+      <button class="btn btn-dark btn-sm" (click)="logout()">Logout</button>
     </div>
   </div>
 </div>

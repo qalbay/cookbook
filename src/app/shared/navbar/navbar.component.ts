@@ -1,3 +1,4 @@
+import { routes } from './../../app-routing.module';
 import { NotificationsService } from './../../services/notifications.service';
 import {
   Component,
@@ -92,5 +93,10 @@ export class NavbarComponent implements OnInit {
 
   social() {
     this.router.navigate(['/social']);
+  }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/authentication'])
   }
 }
