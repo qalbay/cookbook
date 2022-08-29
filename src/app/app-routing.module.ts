@@ -1,7 +1,7 @@
 import { AuthGuard } from './guards/auth.guard';
 import { RxjsComponent } from './components/rxjs/rxjs.component';
 import { NgModule, Component } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
@@ -47,14 +47,14 @@ export const routes: Routes = [
     component: RxjsComponent,
   },
   {
-    path: '',
+    path: '**',
     redirectTo: 'dashboard',
     pathMatch: 'full',
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{preloadingStrategy: PreloadAllModules})],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

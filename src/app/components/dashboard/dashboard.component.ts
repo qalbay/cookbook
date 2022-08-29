@@ -23,12 +23,13 @@ export class DashboardComponent implements OnInit {
   //this VewChild has nothing to do with tempelate variable
   @ViewChild(NavbarComponent) navbarr!: NavbarComponent;
   @ViewChild('content') content!: ElementRef;
+  @ViewChild('btn') btnd!: ElementRef;
   mySubscription!: Subscription;
 
   constructor() {}
 
-  ngOnInit() {}
-
+  ngOnInit() {
+  }
   ngAfterViewInit() {
     this.addItemInChildArrayUsingViewChild();
   }

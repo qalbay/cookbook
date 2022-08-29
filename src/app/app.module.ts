@@ -1,5 +1,4 @@
-import { RouterModule } from '@angular/router';
-import { NavbarComponent } from './shared/navbar/navbar.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { SocialCardModule } from './components/social-card/social-card.module';
 import { DashboardModule } from './components/dashboard/dashboard.module';
 import { NgModule } from '@angular/core';
@@ -9,7 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { routes } from './app-routing.module';
 import { RxjsComponent } from './components/rxjs/rxjs.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -27,7 +25,8 @@ import { StoreModule } from '@ngrx/store';
     FontAwesomeModule,
     HttpClientModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({})
+    StoreModule.forRoot({}),
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

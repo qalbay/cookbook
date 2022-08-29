@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ChildrenOutletContexts, RouterOutlet } from '@angular/router';
+import { ChildrenOutletContexts, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { slideInAnimation } from './constants/animations';
 @Component({
   selector: 'app-root',
@@ -8,12 +8,34 @@ import { slideInAnimation } from './constants/animations';
   animations: [slideInAnimation],
 })
 export class AppComponent {
-  @ViewChild(RouterOutlet) routerOutlet:any;
+  @ViewChild(RouterOutlet) routerOutlet: any;
+  isLoadingRoute = false;
 
-  constructor(private contexts: ChildrenOutletContexts) {}
-
+  constructor(
+    private contexts: ChildrenOutletContexts,
+    private router: Router
+  ) {
+    this.showLoaderConditionally()
+  }
 
   getRouteAnimationData() {
-    return this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
+    return this.contexts.getContext('primary')?.route?.snapshot?.data?.[
+      'animation'
+    ];
+  }
+
+  showLoaderConditionally() {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.isLoadingRoute = true;
+      }
+      if (
+        event instanceof NavigationEnd ||
+        event instanceof NavigationError ||
+        event instanceof NavigationCancel
+      ) {
+        this.isLoadingRoute = false;
+      }
+    });
   }
 }
