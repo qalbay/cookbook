@@ -12,10 +12,11 @@ import { RxjsComponent } from './components/rxjs/rxjs.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
+import { FormarrrayComponent } from './components/formarrray/formarrray.component';
 
 
 @NgModule({
-  declarations: [AppComponent, RxjsComponent],
+  declarations: [AppComponent, RxjsComponent, FormarrrayComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -1,3 +1,4 @@
+import { FormarrrayComponent } from './components/formarrray/formarrray.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RxjsComponent } from './components/rxjs/rxjs.component';
 import { NgModule, Component } from '@angular/core';
@@ -45,6 +46,10 @@ export const routes: Routes = [
   {
     path: 'rxjs',
     component: RxjsComponent,
+  },
+  {
+    path: 'formarray',
+    component: FormarrrayComponent,
   },
   {
     path: '**',
